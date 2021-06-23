@@ -3,8 +3,13 @@ import 'package:game_streaming/data/top_clip_data.dart';
 import 'package:game_streaming/data/top_games_data.dart';
 import 'package:game_streaming/data/trending_data.dart';
 import 'package:game_streaming/widgets/action_button.dart';
+import 'package:game_streaming/widgets/category_list_view.dart';
+import 'package:game_streaming/widgets/header.dart';
 import 'package:game_streaming/widgets/stream_card.dart';
 import 'package:game_streaming/widgets/top_clip_card.dart';
+import 'package:game_streaming/widgets/top_clip_listview.dart';
+import 'package:game_streaming/widgets/top_games_listview.dart';
+import 'package:game_streaming/widgets/trending_listview.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -12,6 +17,15 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  List<String> _categories = [
+    "Shooter",
+    "Arcade",
+    "Strategy",
+    "Racing",
+    "Action",
+    "Simulation"
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,168 +53,31 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 10,
-              ),
-              CategoryTitle(title: "Categories"),
-              SizedBox(
-                height: 10,
-              ),
-              Row(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: Color(0xff0c1731),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                        "Shooter",
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Container(
-                    padding: EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                        color: Color(0xff0c1731),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Center(
-                      child: Text(
-                        "Shooter",
-                        style: Theme.of(context).textTheme.caption,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              CategoryTitle(
-                title: "Trending Streams",
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: trendingStreams.length,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        StreamCard(data: trendingStreams[index]),
-                        SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              CategoryTitle(
-                title: "Top Games",
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 150,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: topGames.length,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        Container(
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.black,
-                            borderRadius: BorderRadius.circular(8),
-                            image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: AssetImage(
-                                topGames[index].thumbnail,
-                              ),
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              CategoryTitle(
-                title: "Top Clips",
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 250,
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: topClips.length,
-                  itemBuilder: (context, index) {
-                    return Row(
-                      children: [
-                        TopClipCard(data: topClips[index]),
-                        SizedBox(
-                          width: 10,
-                        ),
-                      ],
-                    );
-                  },
-                ),
-              ),
+              SizedBox(height: 10),
+              Header(title: "Categories"),
+              SizedBox(height: 10),
+              CategoryListView(categories: _categories),
+              SizedBox(height: 10),
+              Header(title: "Trending Streams"),
+              SizedBox(height: 10),
+              TrendindListView(),
+              Header(title: "Top Games"),
+              SizedBox(height: 10),
+              TopGamesListView(),
+              SizedBox(height: 20),
+              Header(title: "Top Clips"),
+              SizedBox(height: 10),
+              TopClipListVIew(),
             ],
           ),
         ),
       ),
-    );
-  }
-}
-
-class CategoryTitle extends StatelessWidget {
-  final String title;
-  const CategoryTitle({
-    Key key,
-    this.title,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.headline3,
-        ),
-        Text(
-          "SEE ALL",
-          style: Theme.of(context).textTheme.caption,
-        ),
-      ],
     );
   }
 }
