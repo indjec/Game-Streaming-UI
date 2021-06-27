@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:game_streaming/data/top_clip_data.dart';
-import 'package:game_streaming/data/top_games_data.dart';
-import 'package:game_streaming/data/trending_data.dart';
+import 'package:game_streaming/constants/constants.dart';
 import 'package:game_streaming/widgets/action_button.dart';
 import 'package:game_streaming/widgets/category_list_view.dart';
 import 'package:game_streaming/widgets/header.dart';
-import 'package:game_streaming/widgets/stream_card.dart';
-import 'package:game_streaming/widgets/top_clip_card.dart';
 import 'package:game_streaming/widgets/top_clip_listview.dart';
 import 'package:game_streaming/widgets/top_games_listview.dart';
 import 'package:game_streaming/widgets/trending_listview.dart';
@@ -29,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xff08112a),
+      backgroundColor: kPrimaryColor,
       appBar: AppBar(
         leadingWidth: 250,
         leading: Padding(

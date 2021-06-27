@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:game_streaming/constants/constants.dart';
 import 'package:game_streaming/screens/home_screen.dart';
 
 void main() {
@@ -13,12 +14,10 @@ class MyApp extends StatelessWidget {
       title: 'Game Streaming',
       theme: ThemeData(
         brightness: Brightness.dark,
-        // accentColor: Color(0xff0095f3),
         accentColor: Color(0xffEEB76B),
         appBarTheme: AppBarTheme(
           elevation: 0,
-          // backgroundColor: Colors.white,
-          backgroundColor: Color(0xff08112a),
+          backgroundColor: kPrimaryColor,
         ),
         textTheme: TextTheme(
             headline6: TextStyle(
@@ -48,7 +47,7 @@ class MyApp extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
             subtitle1: TextStyle(
-              color: Color(0xff707ba1),
+              color: Colors.white,
               fontFamily: 'Poppins',
               fontSize: 12,
             )),
